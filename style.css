@@ -4,3 +4,36 @@ body {
   padding: 0;
   text-align: center;
 }
+
+body {
+  background-image: url("img/simcity.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+p {
+  color: #ff0000;
+  font-size: 1.5em;
+  font-family: monospace;
+}
+
+button {
+  width: 90%;
+  padding: 0.2em;
+  margin-top: 0.3em;
+}
+
+.flat {
+  background-image: url("img/explosion.jpg");
+}
+
+.gamespace {
+  background-color: #000000;
+  padding: 0.5em;
+  max-width: 200px;
+  margin: 4em auto;
+}
+
+.green {
+  color: #00b600;
+}
