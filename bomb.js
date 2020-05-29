@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ------------ GAME LOGIC VARIABLES ----------------
   const startingTime = 30;
   let remainingTime = 0;
-  let gameOver = false;
+  let gameOver = true;
   let countdown = null; // Will hold countdown
   let wiresToCut = [];
 
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function init() {
     remainingTime = startingTime;
+    gameOver = false;
     // set wires to cut
     for (const color in wireState) {
       let randomNum = Math.random();
@@ -40,14 +41,31 @@ document.addEventListener("DOMContentLoaded", function () {
         wiresToCut.push(color);
       }
     }
+    // FOR DEBUGGING
     console.log(wiresToCut);
-    countdown = setInterval(updateClock, 100);
+    countdown = setInterval(updateClock, 1000);
     resetBtn.disabled = true;
   }
 
   function wireClick(e) {
-    console.log("clicked wire box");
-    console.log(e.target.id);
+    console.log("You clicked" + e.target.id);
+    let color = e.target.id;
+    if (!gameOver && !wireState[color]) {
+      e.target.src = "img/cut-" + color + "-wire.png";
+      wireState[color] = true;
+      let wireIndex = wiresToCut.indexOf(color);
+      // If the wire has an index, it needs to be cut!
+      if (wireIndex > -1) {
+        console.log("Correct!");
+        wiresToCut.splice(wireIndex, 1);
+        if (wiresToCut.length === 0) {
+          endGame(true);
+        }
+      } else {
+        console.log("Bad news bears");
+        endGame(false);
+      }
+    }
   }
 
   function updateClock() {
